@@ -1,0 +1,21 @@
+{
+  "name": "projeto-edu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/edutanaka/edutanaka.github.io.git.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/edutanaka/edutanaka.github.io.git",
+  "dependencies": {
+    "bootstrap": "4.0.0",    
+    "jquery": "3.3.1"    
+  }
+}

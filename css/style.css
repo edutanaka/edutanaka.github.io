@@ -1,0 +1,22 @@
+
+#rodape {
+    text-decoration: none;
+}
+
+#produtos .card {
+    width: 18rem;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('http://placehold.it/1200x500');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
