@@ -16,6 +16,6 @@
   "homepage": "https://github.com/edutanaka/edutanaka.github.io.git",
   "dependencies": {
     "bootstrap": "4.3.1",
-    "jquery": "3.4.1"
+    "jquery": "3.5.0"
   }
 }
