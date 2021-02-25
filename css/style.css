@@ -25,3 +25,18 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.logo {
+  /* color: lightsteelblue; */
+  color: white;
+  padding: 0px 25px;
+  font-size: 25px;
+  border: 1px solid teal;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.logo > .tech {
+  font-size: 20px;
+  text-align: center;
+}
