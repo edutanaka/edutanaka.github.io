@@ -1,1 +1,0 @@
-# edutanaka.github.io
