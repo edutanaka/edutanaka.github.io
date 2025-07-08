@@ -18,7 +18,6 @@
 
         body {
             font-family: var(--fonte-principal);
-            background-color: var(--cor-principal);
             color: var(--cor-texto);
             display: flex;
             flex-direction: column; /* Empilha nome e slogan verticalmente */
@@ -27,6 +26,10 @@
             min-height: 100vh;      /* Ocupa toda a altura da tela */
             margin: 0;             /* Remove margens padrão do body */
             overflow: hidden;        /* Evita barras de rolagem desnecessárias */
+            /* Efeito de gradiente animado */
+            background: linear-gradient(-45deg, #2c3e50, #34495e, #2c3e50, #34495e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
 
         .nome-container {
@@ -54,12 +57,24 @@
             color: var(--cor-destaque);
             margin-top: 0.5rem; /* Espaço entre nome e slogan */
             animation: fadeIn 3s ease-in-out;  /*Animação, atrasada para depois do nome*/
+            transition: transform 0.3s ease, color 0.3s ease; /* Transição para hover */
+        }
+
+        .slogan:hover {
+            transform: scale(1.1);
+            color: #f1c40f; /* Amarelo mais brilhante no hover */
         }
 
         /* Animações */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
 
@@ -104,6 +119,21 @@
         <h1>Eduardo Tanaka</h1>
         <p><a href="https://instagram.com/eduardotanaka1" class="slogan">@eduardotanaka1</a></p>
     </div>
-
+    <script>
+        (function(d,t) {
+          var BASE_URL="https://chat.edutanaka.me";
+          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          g.src=BASE_URL+"/packs/js/sdk.js";
+          g.defer = true;
+          g.async = true;
+          s.parentNode.insertBefore(g,s);
+          g.onload=function(){
+            window.chatwootSDK.run({
+              websiteToken: 'oYszcdxGKSMqde8u7EkYLDP3',
+              baseUrl: BASE_URL
+            })
+          }
+        })(document,"script");
+      </script>      
 </body>
 </html>
