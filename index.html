@@ -5,32 +5,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eduardo Tanaka</title>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://load.sgtm.edutanaka.me/286fvvyjnex.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','3sfsc=aWQ9R1RNLVA5NjQ2VzJa&sort=desc');</script>
+    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://load.sgtm.edutanaka.me/286fvvyjnex.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','3sfsc=aWQ9R1RNLVA5NjQ2VzJa&sort=desc');</script> -->
+     <!-- Signals Gateway Pixel Code -->
+  <script>
+  !function(a,h,e,v,n,t,s)
+    {if(a.cbq)return;n=a.cbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!a._cbq)a._cbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=h.createElement(e);t.async=!0;
+    t.src=v;s=h.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://sgw.stape.ac/sdk/3172380098504136061/events.js');
+    cbq('setHost', 'https://sgw.stape.ac/');
+    cbq('init', '3172380098504136061');
+    cbq('track', 'PageView');
+  </script>
+    <!-- End Signals Gateway Pixel Code -->
     <style>
         :root {
-            --cor-principal: #2c3e50; /* Azul escuro, elegante */
+            --cor-principal: #0a0a0a; /* Preto espacial */
             --cor-secundaria: #ffffff;
-            --cor-texto: #ecf0f1; /* Cinza claro, para contraste */
-            --cor-destaque: #f39c12; /* Laranja/Amarelo, para o slogan */
-            --fonte-principal: 'Montserrat', sans-serif; /* Fonte moderna */
-            --fonte-slogan: 'Raleway', sans-serif;      /* Fonte diferente para o slogan */
+            --cor-texto: #ffffff; /* Branco para contraste no espaço */
+            --cor-destaque: #64ffda; /* Cyan/Turquesa espacial */
+            --fonte-principal: 'Montserrat', sans-serif;
+            --fonte-slogan: 'Raleway', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: var(--fonte-principal);
             color: var(--cor-texto);
             display: flex;
-            flex-direction: column; /* Empilha nome e slogan verticalmente */
-            justify-content: center; /* Centraliza verticalmente */
-            align-items: center;     /* Centraliza horizontalmente */
-            min-height: 100vh;      /* Ocupa toda a altura da tela */
-            margin: 0;             /* Remove margens padrão do body */
-            overflow: hidden;        /* Evita barras de rolagem desnecessárias */
-            /* Efeito de gradiente animado */
-            background: linear-gradient(-45deg, #2c3e50, #34495e, #2c3e50, #34495e);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0f0f23 0%, #000000 100%);
+            position: relative;
         }
+
+        /* Parallax Space Background */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .stars::before,
+        .stars::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        .stars-layer1 {
+            animation: parallax-stars1 120s linear infinite;
+        }
+
+        .stars-layer2 {
+            animation: parallax-stars2 80s linear infinite;
+        }
+
+        .stars-layer3 {
+            animation: parallax-stars3 40s linear infinite;
+        }
+
+        /* Generate random stars */
+        .stars-layer1::before { top: 20%; left: 10%; animation-delay: 0s; }
+        .stars-layer1::after { top: 60%; left: 80%; animation-delay: 1s; }
+        .stars-layer2::before { top: 30%; left: 60%; animation-delay: 0.5s; }
+        .stars-layer2::after { top: 80%; left: 20%; animation-delay: 1.5s; }
+        .stars-layer3::before { top: 10%; left: 90%; animation-delay: 0.8s; }
+        .stars-layer3::after { top: 70%; left: 40%; animation-delay: 0.3s; }
+
+        /* Nebula effect */
+        .nebula {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 20, 147, 0.05) 0%, transparent 60%);
+            animation: nebula-drift 25s ease-in-out infinite;
+        }
+
+        /* Shooting stars */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, #64ffda, transparent);
+            border-radius: 50%;
+            animation: shooting 3s ease-out infinite;
+        }
+
+        .shooting-star:nth-child(1) { top: 20%; left: -10%; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 40%; left: -10%; animation-delay: 2s; }
+        .shooting-star:nth-child(3) { top: 60%; left: -10%; animation-delay: 4s; }
 
         .nome-container {
             text-align: center;
