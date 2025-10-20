@@ -8,13 +8,16 @@
 <body>
     <h1>Dashboard APP</h1>
     <script>
-        window.parent.postMessage({
-            type: 'chatwoot-dashboard-app:fetch-info',
-            function(x) {
-                console.log(x);
-            }
-        }, '*');
-    </script>
+        (function () {
+
+            window.parent.postMessage({
+                type: 'chatwoot-dashboard-app:fetch-info',
+                function(x) {
+                    console.log(x);
+                }
+            }, '*');
+        })();
+        </script>
     
 </body>
 </html>
