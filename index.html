@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eduardo Tanaka</title>
     <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://load.sgtm.edutanaka.me/286fvvyjnex.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','3sfsc=aWQ9R1RNLVA5NjQ2VzJa&sort=desc');</script> -->
-     <!-- Signals Gateway Pixel Code -->
+    <!-- Signals Gateway Pixel Code -->
     <!-- End Signals Gateway Pixel Code -->
     <style>
         :root {
-            --cor-principal: #0a0a0a; /* Preto espacial */
+            --cor-principal: #0a0a0a;
+            /* Preto espacial */
             --cor-secundaria: #ffffff;
-            --cor-texto: #ffffff; /* Branco para contraste no espaço */
-            --cor-destaque: #64ffda; /* Cyan/Turquesa espacial */
+            --cor-texto: #ffffff;
+            /* Branco para contraste no espaço */
+            --cor-destaque: #64ffda;
+            /* Cyan/Turquesa espacial */
             --fonte-principal: 'Montserrat', sans-serif;
             --fonte-slogan: 'Raleway', sans-serif;
         }
@@ -80,19 +83,48 @@
         }
 
         /* Generate random stars */
-        .stars-layer1::before { top: 20%; left: 10%; animation-delay: 0s; }
-        .stars-layer1::after { top: 60%; left: 80%; animation-delay: 1s; }
-        .stars-layer2::before { top: 30%; left: 60%; animation-delay: 0.5s; }
-        .stars-layer2::after { top: 80%; left: 20%; animation-delay: 1.5s; }
-        .stars-layer3::before { top: 10%; left: 90%; animation-delay: 0.8s; }
-        .stars-layer3::after { top: 70%; left: 40%; animation-delay: 0.3s; }
+        .stars-layer1::before {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .stars-layer1::after {
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .stars-layer2::before {
+            top: 30%;
+            left: 60%;
+            animation-delay: 0.5s;
+        }
+
+        .stars-layer2::after {
+            top: 80%;
+            left: 20%;
+            animation-delay: 1.5s;
+        }
+
+        .stars-layer3::before {
+            top: 10%;
+            left: 90%;
+            animation-delay: 0.8s;
+        }
+
+        .stars-layer3::after {
+            top: 70%;
+            left: 40%;
+            animation-delay: 0.3s;
+        }
 
         /* Nebula effect */
         .nebula {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(255, 20, 147, 0.05) 0%, transparent 60%);
@@ -109,24 +141,45 @@
             animation: shooting 3s ease-out infinite;
         }
 
-        .shooting-star:nth-child(1) { top: 20%; left: -10%; animation-delay: 0s; }
-        .shooting-star:nth-child(2) { top: 40%; left: -10%; animation-delay: 2s; }
-        .shooting-star:nth-child(3) { top: 60%; left: -10%; animation-delay: 4s; }
+        .shooting-star:nth-child(1) {
+            top: 20%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .shooting-star:nth-child(2) {
+            top: 40%;
+            left: -10%;
+            animation-delay: 2s;
+        }
+
+        .shooting-star:nth-child(3) {
+            top: 60%;
+            left: -10%;
+            animation-delay: 4s;
+        }
 
         .nome-container {
             text-align: center;
-            position: relative;    /* Permite posicionar a animação */
-            animation: fadeIn 2s ease-in-out; /* Animação de fade-in */
+            position: relative;
+            /* Permite posicionar a animação */
+            animation: fadeIn 2s ease-in-out;
+            /* Animação de fade-in */
 
         }
 
         h1 {
-            font-size: 4rem;       /* Tamanho grande para o nome */
+            font-size: 4rem;
+            /* Tamanho grande para o nome */
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra suave */
-            white-space: nowrap;    /* Evita quebra de linha */
-            overflow: hidden;      /* Para o efeito de digitação */
-            border-right: .15em solid var(--cor-destaque); /*"Cursor"*/
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* Sombra suave */
+            white-space: nowrap;
+            /* Evita quebra de linha */
+            overflow: hidden;
+            /* Para o efeito de digitação */
+            border-right: .15em solid var(--cor-destaque);
+            /*"Cursor"*/
             animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
 
 
@@ -136,47 +189,78 @@
             font-family: var(--fonte-slogan);
             font-size: 1.5rem;
             color: var(--cor-destaque);
-            margin-top: 0.5rem; /* Espaço entre nome e slogan */
-            animation: fadeIn 3s ease-in-out;  /*Animação, atrasada para depois do nome*/
-            transition: transform 0.3s ease, color 0.3s ease; /* Transição para hover */
+            margin-top: 0.5rem;
+            /* Espaço entre nome e slogan */
+            animation: fadeIn 3s ease-in-out;
+            /*Animação, atrasada para depois do nome*/
+            transition: transform 0.3s ease, color 0.3s ease;
+            /* Transição para hover */
         }
 
         .slogan:hover {
             transform: scale(1.1);
-            color: #f1c40f; /* Amarelo mais brilhante no hover */
+            color: #f1c40f;
+            /* Amarelo mais brilhante no hover */
         }
 
         /* Animações */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
 
         /* Efeito de digitação (typing) */
         @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
         }
 
         /* Efeito de cursor piscando (blink-caret) */
         @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--cor-destaque); }
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--cor-destaque);
+            }
         }
 
 
         /* Media Queries (Responsividade) */
         @media (max-width: 768px) {
             h1 {
-                font-size: 3rem; /* Reduz o tamanho em telas menores */
+                font-size: 3rem;
+                /* Reduz o tamanho em telas menores */
             }
+
             .slogan {
                 font-size: 1.2rem;
             }
@@ -184,38 +268,58 @@
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2rem; /* Ainda menor em telas pequenas */
+                font-size: 2rem;
+                /* Ainda menor em telas pequenas */
             }
+
             .slogan {
-               font-size: 1rem;
+                font-size: 1rem;
             }
         }
 
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
     </style>
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://load.sgtm.edutanaka.me/286fvvyjnex.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','3sfsc=aWQ9R1RNLVA5NjQ2VzJa&fsT=am');</script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = "https://load.sgtm.edutanaka.me/286fvvyjnex.js?" + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', '3sfsc=aWQ9R1RNLVA5NjQ2VzJa&fsT=am');</script>
 </head>
+
 <body>
 
     <div class="nome-container">
         <h1>Eduardo Tanaka</h1>
         <p><a href="https://instagram.com/eduardotanaka1" class="slogan">@eduardotanaka1</a></p>
     </div>
+
+    <footer>
+        <a href="https://stape.io?pt=gdatvpja&rs=site&rr=global" target="_blank">
+            <img src="https://cdn.stape.io/i/644286f038012250033022.svg" alt="Stape partner" width="130" height="62"
+                style='object-fit: contain' loading="lazy" />
+        </a>
+    </footer>
     <script>
-        (function(d,t) {
-          var BASE_URL="https://chat.edutanaka.me";
-          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-          g.src=BASE_URL+"/packs/js/sdk.js";
-          g.defer = true;
-          g.async = true;
-          s.parentNode.insertBefore(g,s);
-          g.onload=function(){
-            window.chatwootSDK.run({
-              websiteToken: 'oYszcdxGKSMqde8u7EkYLDP3',
-              baseUrl: BASE_URL
-            })
-          }
-        })(document,"script");
-      </script>      
+        (function (d, t) {
+            var BASE_URL = "https://chat.edutanaka.me";
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = BASE_URL + "/packs/js/sdk.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+            g.onload = function () {
+                window.chatwootSDK.run({
+                    websiteToken: 'oYszcdxGKSMqde8u7EkYLDP3',
+                    baseUrl: BASE_URL
+                })
+            }
+        })(document, "script");
+    </script>
 </body>
+
 </html>
