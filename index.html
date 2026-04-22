@@ -41,13 +41,13 @@
             color: var(--cor-texto);
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-y: auto;
             background: radial-gradient(ellipse at center, #0f0f23 0%, #000000 100%);
             position: relative;
+            padding: 4rem 1.5rem 3rem;
         }
 
         /* Parallax Space Background */
@@ -286,12 +286,125 @@
             }
         }
 
+        .page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 760px;
+            z-index: 1;
+        }
+
+        .especialidade {
+            font-family: var(--fonte-slogan);
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.65);
+            text-align: center;
+            margin-top: 2rem;
+            max-width: 640px;
+            line-height: 1.7;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .especialidade strong {
+            color: var(--cor-destaque);
+            font-weight: 600;
+        }
+
+        .portfolio-section {
+            margin-top: 3rem;
+            width: 100%;
+            animation: fadeIn 3.5s ease-in-out;
+        }
+
+        .portfolio-title {
+            font-size: 0.75rem;
+            color: var(--cor-destaque);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .portfolio-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.65rem 0.75rem;
+            border-radius: 6px;
+            border-left: 2px solid transparent;
+            transition: background 0.2s ease, border-left-color 0.2s ease;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-item:hover {
+            background: rgba(100, 255, 218, 0.05);
+            border-left-color: var(--cor-destaque);
+        }
+
+        .portfolio-dash {
+            color: var(--cor-destaque);
+            opacity: 0.4;
+            flex-shrink: 0;
+        }
+
+        .client-name {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .client-services {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.82rem;
+        }
+
+        .client-handle {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-left: auto;
+            white-space: nowrap;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .client-handle:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
         footer {
-            position: absolute;
-            bottom: 20px;
+            margin-top: 4rem;
             width: 100%;
             text-align: center;
             z-index: 10;
+        }
+
+        @media (max-width: 540px) {
+            .portfolio-item {
+                gap: 0.3rem;
+            }
+
+            .client-handle {
+                margin-left: 0;
+                width: 100%;
+                padding-left: 1.1rem;
+            }
+
+            h1 {
+                white-space: normal;
+                border-right: none;
+                animation: fadeIn 1s ease-in-out;
+            }
         }
     </style>
     <link
@@ -302,19 +415,85 @@
 
 <body>
 
-    <div class="nome-container">
-        <h1>Eduardo Tanaka</h1>
-        <p><a href="https://instagram.com/eduardotanaka1" class="slogan">@eduardotanaka1</a></p>
-    </div>
+    <div class="page-content">
+        <div class="nome-container">
+            <h1>Eduardo Tanaka</h1>
+            <p><a href="https://instagram.com/eduardotanaka1" class="slogan">@eduardotanaka1</a></p>
+        </div>
 
-    <footer>
-        <img src="images/Meta_Business_Partners_two_line_lockup_negative_primary_RGB.svg" alt="Meta Business Partner"
-            width="130" height="100" style="vertical-align: middle;" loading="lazy" /><br>
-        <a href="https://stape.io?pt=gdatvpja&rs=site&rr=global" target="_blank">
-            <img src="https://cdn.stape.io/i/644286f038012250033022.svg" alt="Stape partner" width="130" height="62"
-                style='object-fit: contain' loading="lazy" />
-        </a>
-    </footer>
+        <p class="especialidade">
+            Especialista em <strong>performance de marketing</strong>, <strong>business intelligence</strong> e <strong>integrações com LLMs</strong>
+        </p>
+
+        <section class="portfolio-section">
+            <h2 class="portfolio-title">Portfólio</h2>
+            <ul class="portfolio-list">
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Natalia Beauty</span>
+                    <span class="client-services">(Lançamentos / Perpétuos / Imersão High-Ticket)</span>
+                    <a href="https://instagram.com/nataliabeauty" class="client-handle" target="_blank" rel="noopener">@nataliabeauty</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Pablo Marçal</span>
+                    <span class="client-services">(Lançamentos / Perpétuo / Imersão High-Ticket)</span>
+                    <a href="https://instagram.com/pablomarcal1" class="client-handle" target="_blank" rel="noopener">@pablomarcal1</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Renato Cariani</span>
+                    <span class="client-services">(Lançamentos / Perpétuo)</span>
+                    <a href="https://instagram.com/renato_cariani" class="client-handle" target="_blank" rel="noopener">@renato_cariani</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Marcos Paulo</span>
+                    <span class="client-services">(Lançamentos / Imersão High-Ticket)</span>
+                    <a href="https://instagram.com/eusoumarcospaulo" class="client-handle" target="_blank" rel="noopener">@eusoumarcospaulo</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Kaká Diniz</span>
+                    <span class="client-services">(Lançamentos / Perpétuo)</span>
+                    <a href="https://instagram.com/kakadiniz" class="client-handle" target="_blank" rel="noopener">@kakadiniz</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Igor Alves</span>
+                    <span class="client-services">(Imersão High-Ticket)</span>
+                    <a href="https://instagram.com/igoorcostalves" class="client-handle" target="_blank" rel="noopener">@igoorcostalves</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Loovi</span>
+                    <span class="client-services">(Lançamentos)</span>
+                    <a href="https://instagram.com/loovi" class="client-handle" target="_blank" rel="noopener">@loovi</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Doutora Elisiane</span>
+                    <span class="client-services">(Lançamentos)</span>
+                    <a href="https://instagram.com/doutoraelisiane" class="client-handle" target="_blank" rel="noopener">@doutoraelisiane</a>
+                </li>
+                <li class="portfolio-item">
+                    <span class="portfolio-dash">—</span>
+                    <span class="client-name">Kenya Gama</span>
+                    <span class="client-services">(Lançamento)</span>
+                    <a href="https://instagram.com/keniagama" class="client-handle" target="_blank" rel="noopener">@keniagama</a>
+                </li>
+            </ul>
+        </section>
+
+        <footer>
+            <img src="images/Meta_Business_Partners_two_line_lockup_negative_primary_RGB.svg" alt="Meta Business Partner"
+                width="130" height="100" style="vertical-align: middle;" loading="lazy" /><br>
+            <a href="https://stape.io?pt=gdatvpja&rs=site&rr=global" target="_blank">
+                <img src="https://cdn.stape.io/i/644286f038012250033022.svg" alt="Stape partner" width="130" height="62"
+                    style='object-fit: contain' loading="lazy" />
+            </a>
+        </footer>
+    </div>
 
 </body>
 
