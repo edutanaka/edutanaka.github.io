@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduardo Tanaka — Preview Ed Signal</title>
+  <meta name="description" content="Performance de marketing, business intelligence e integrações com inteligência artificial.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-elevated: #0c0f18;
+      --text: #f4f7fb;
+      --muted: rgba(244, 247, 251, 0.62);
+      --faint: rgba(244, 247, 251, 0.38);
+      --accent: #64ffda;
+      --accent-soft: rgba(100, 255, 218, 0.14);
+      --accent-glow: rgba(100, 255, 218, 0.35);
+      --violet: rgba(138, 92, 255, 0.22);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 18px;
+      --font-display: "Syne", system-ui, sans-serif;
+      --font-body: "DM Sans", system-ui, sans-serif;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(900px 500px at 15% -10%, var(--violet), transparent 60%),
+        radial-gradient(700px 420px at 85% 10%, rgba(100, 255, 218, 0.12), transparent 55%),
+        radial-gradient(ellipse at center, #0b1020 0%, var(--bg) 70%);
+    }
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+    .blob {
+      position: fixed;
+      width: 42vw;
+      height: 42vw;
+      max-width: 520px;
+      max-height: 520px;
+      border-radius: 50%;
+      filter: blur(70px);
+      background: radial-gradient(circle, rgba(100, 255, 218, 0.18), transparent 70%);
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      animation: blobDrift 18s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .preview-banner {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 0.55rem 1rem;
+      background: rgba(100, 255, 218, 0.08);
+      border-bottom: 1px solid rgba(100, 255, 218, 0.25);
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(10px);
+    }
+    .preview-banner strong { font-weight: 600; color: #fff; }
+
+    .nav {
+      position: sticky;
+      top: 34px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.is-solid {
+      background: rgba(5, 6, 10, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom-color: var(--border);
+    }
+    .nav-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      padding: 0;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .nav-mark:hover {
+      border-color: rgba(100, 255, 218, 0.45);
+      box-shadow: 0 0 24px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+    .nav-tnk {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 11px;
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #04120e;
+      box-shadow: 0 0 0 0 var(--accent-glow);
+    }
+    .btn-primary:hover { box-shadow: 0 0 28px var(--accent-glow); }
+    .btn-ghost {
+      border-color: var(--border);
+      color: var(--text);
+      background: rgba(255,255,255,0.02);
+    }
+    .btn-ghost:hover { border-color: rgba(100, 255, 218, 0.4); }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - 110px);
+      display: grid;
+      place-items: center;
+      padding: 2.5rem 0 4rem;
+      text-align: center;
+    }
+    .ed-stage {
+      position: relative;
+      width: min(280px, 70vw);
+      height: min(280px, 70vw);
+      margin: 0 auto 1.75rem;
+    }
+    .ed-glow {
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow), transparent 68%);
+      filter: blur(18px);
+      opacity: 0;
+      animation: glowIn 1.4s ease 0.9s forwards;
+    }
+    .ed-mark {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 18px rgba(100, 255, 218, 0.25));
+    }
+    .ed-mark .stroke {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: drawStroke 1.15s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+    .ed-mark .stroke-d { animation-delay: 0.28s; }
+    .ed-mark .fill-soft {
+      fill: rgba(100, 255, 218, 0.08);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.05s forwards;
+    }
+    .ed-dot {
+      fill: var(--accent);
+      transform-origin: 168px 72px;
+      opacity: 0;
+      animation: popDot 0.45s ease 1.15s forwards, breathe 2.8s ease-in-out 1.7s infinite;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.2s forwards;
+    }
+    .kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: breathe 2.8s ease-in-out infinite;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.85rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.3s forwards;
+    }
+    .tagline {
+      max-width: 42rem;
+      margin: 0 auto 1.75rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.4s forwards;
+    }
+    .tagline strong { color: var(--text); font-weight: 600; }
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.5s forwards;
+    }
+    .handle {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--accent);
+      font-size: 0.95rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.6s forwards;
+    }
+    .handle:hover { text-decoration: underline; }
+
+    section { padding: 4.5rem 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      letter-spacing: -0.02em;
+    }
+    .section-head p { color: var(--muted); max-width: 32rem; }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .tile {
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.25rem;
+      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+    .tile:hover {
+      border-color: rgba(100, 255, 218, 0.35);
+      transform: translateY(-3px);
+      background: linear-gradient(180deg, rgba(100,255,218,0.06), rgba(255,255,255,0.02));
+    }
+    .tile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+    .tile h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.45rem;
+      font-family: var(--font-display);
+    }
+    .tile p { color: var(--muted); font-size: 0.94rem; }
+
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding: 1.2rem 1.2rem 1.1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(12, 15, 24, 0.75);
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .card.is-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+      border-color: rgba(100, 255, 218, 0.4);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.28);
+      transform: translateY(-2px);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 0.75rem;
+    }
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+    }
+    .card .ig {
+      color: var(--accent);
+      font-size: 0.88rem;
+      white-space: nowrap;
+      opacity: 0.9;
+    }
+    .card .ig:hover { text-decoration: underline; opacity: 1; }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .pill {
+      font-size: 0.75rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 999px;
+      padding: 0.28rem 0.65rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 3rem;
+      margin-top: 1rem;
+    }
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-copy { color: var(--faint); font-size: 0.88rem; }
+    .partners {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      opacity: 0.85;
+    }
+    .partners img { height: 42px; width: auto; }
+
+    @keyframes drawStroke {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes glowIn {
+      to { opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes popDot {
+      from { opacity: 0; transform: scale(0.4); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 0 transparent); }
+      50% { opacity: 0.7; filter: drop-shadow(0 0 8px var(--accent)); }
+    }
+    @keyframes blobDrift {
+      0%, 100% { transform: translate(-50%, 0) scale(1); }
+      50% { transform: translate(-46%, 8%) scale(1.08); }
+    }
+
+    @media (max-width: 820px) {
+      .tiles { grid-template-columns: 1fr; }
+      .portfolio { grid-template-columns: 1fr; }
+      .nav { top: 54px; }
+    }
+    @media (max-width: 540px) {
+      .hero { min-height: auto; padding-top: 1.5rem; }
+      .nav-links a:not(.btn) { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .ed-mark .stroke { stroke-dashoffset: 0; }
+      .ed-glow, .ed-dot, .fill-soft, .kicker, h1, .tagline, .hero-actions, .handle { opacity: 1; }
+      .card { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="blob" aria-hidden="true"></div>
+
+  <div class="preview-banner">
+    <span><strong>Preview</strong> — redesign “Ed Signal” + logo TNK (não publicado)</span>
+    <span>Arquivo: <code>ed-preview.html</code></span>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav-mark" href="#top" aria-label="TNK — voltar ao topo">
+      <img class="nav-tnk" src="images/tnk-logo-dark.png" alt="TNK" width="42" height="42">
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#como">Como ajudo</a>
+      <a href="#portfolio">Portfólio</a>
+      <a class="btn btn-primary" href="https://instagram.com/eduardotanaka1" target="_blank" rel="noopener">Falar no Instagram</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div>
+        <div class="ed-stage" aria-hidden="true">
+          <div class="ed-glow"></div>
+          <svg class="ed-mark" viewBox="0 0 200 160" role="img" aria-label="Monograma Ed">
+            <path class="fill-soft" d="M38 128 V42 H98 C124 42 142 60 142 78 C142 96 124 114 98 114 H62 V128 Z"/>
+            <path class="stroke" pathLength="1"
+              d="M38 128 V42 H98 C118 42 132 56 132 78 C132 100 118 114 98 114 H62"/>
+            <path class="stroke stroke-d" pathLength="1"
+              d="M148 128 V62 C148 48 160 42 172 42"/>
+            <circle class="ed-dot" cx="172" cy="42" r="8"/>
+          </svg>
+        </div>
+
+        <p class="kicker">TNK · Ed Signal</p>
+        <h1>Eduardo Tanaka</h1>
+        <p class="tagline">
+          Especialista em <strong>performance de marketing</strong>,
+          <strong>business intelligence</strong> e
+          <strong>integrações com inteligência artificial</strong>.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://instagram.com/eduardotanaka1" target="_blank" rel="noopener">Falar no Instagram</a>
+          <a class="btn btn-ghost" href="#portfolio">Ver portfólio</a>
+        </div>
+        <a class="handle" href="https://instagram.com/eduardotanaka1" target="_blank" rel="noopener">@eduardotanaka1</a>
+      </div>
+    </section>
+
+    <section class="wrap" id="como">
+      <div class="section-head">
+        <h2>Como eu ajudo</h2>
+        <p>Do anúncio ao dado — e do dado à automação com IA.</p>
+      </div>
+      <div class="tiles">
+        <article class="tile">
+          <div class="tile-icon">P</div>
+          <h3>Performance</h3>
+          <p>Lançamentos, perpétuos e imersões high-ticket com foco em conversão e escala.</p>
+        </article>
+        <article class="tile">
+          <div class="tile-icon">BI</div>
+          <h3>Business intelligence</h3>
+          <p>Visão clara de funil, receita e canais — para decidir com números, não feeling.</p>
+        </article>
+        <article class="tile">
+          <div class="tile-icon">AI</div>
+          <h3>Integrações com IA</h3>
+          <p>Conecto ferramentas, dados e automações para o marketing trabalhar mais rápido.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="portfolio">
+      <div class="section-head">
+        <h2>Portfólio</h2>
+        <p>Marcas e operações com quem já construí resultado.</p>
+      </div>
+      <div class="portfolio" id="portfolio-grid">
+        <!-- cards injected for stagger -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-copy">© <span id="year"></span> Eduardo Tanaka · Preview local</p>
+      </div>
+      <div class="partners">
+        <img src="images/Meta_Business_Partners_two_line_lockup_negative_primary_RGB.svg" alt="Meta Business Partner" width="130" height="50" loading="lazy">
+        <a href="https://stape.io?pt=gdatvpja&rs=site&rr=global" target="_blank" rel="noopener">
+          <img src="https://cdn.stape.io/i/644286f038012250033022.svg" alt="Stape partner" width="130" height="50" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const clients = [
+      { name: "Natalia Beauty", services: ["Lançamentos", "Perpétuos", "Imersão High-Ticket"], handle: "nataliabeauty" },
+      { name: "Pablo Marçal", services: ["Lançamentos", "Perpétuo", "Imersão High-Ticket"], handle: "pablomarcal1" },
+      { name: "Renato Cariani", services: ["Lançamentos", "Perpétuo"], handle: "renato_cariani" },
+      { name: "Marcos Paulo", services: ["Lançamentos", "Imersão High-Ticket"], handle: "eusoumarcospaulo" },
+      { name: "Kaká Diniz", services: ["Lançamentos", "Perpétuo"], handle: "kakadiniz" },
+      { name: "Igor Alves", services: ["Imersão High-Ticket"], handle: "igoorcostalves" },
+      { name: "Loovi", services: ["Lançamentos"], handle: "loovi" },
+      { name: "Doutora Elisiane", services: ["Lançamentos"], handle: "doutoraelisiane" },
+      { name: "Kenia Gama", services: ["Lançamento"], handle: "keniagama" },
+    ];
+
+    const grid = document.getElementById("portfolio-grid");
+    grid.innerHTML = clients.map((c) => `
+      <article class="card">
+        <div class="card-top">
+          <h3>${c.name}</h3>
+          <a class="ig" href="https://instagram.com/${c.handle}" target="_blank" rel="noopener">@${c.handle}</a>
+        </div>
+        <div class="pills">${c.services.map((s) => `<span class="pill">${s}</span>`).join("")}</div>
+      </article>
+    `).join("");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const nav = document.getElementById("nav");
+    const onScroll = () => nav.classList.toggle("is-solid", window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const cards = [...document.querySelectorAll(".card")];
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const i = cards.indexOf(entry.target);
+            entry.target.style.transitionDelay = `${Math.min(i, 8) * 60}ms`;
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      cards.forEach((card) => io.observe(card));
+    } else {
+      cards.forEach((card) => card.classList.add("is-in"));
+    }
+  </script>
+</body>
+</html>
