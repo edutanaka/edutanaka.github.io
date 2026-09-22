@@ -168,6 +168,16 @@
       box-shadow: 0 0 0 0 var(--accent-glow);
     }
     .btn-primary:hover { box-shadow: 0 0 28px var(--accent-glow); }
+    /* Nav link color must not override primary button text */
+    .nav-links a.btn,
+    .nav-links a.btn-primary {
+      color: #04120e;
+      font-weight: 700;
+    }
+    .nav-links a.btn-primary:hover {
+      color: #04120e;
+      background: #7dffE3;
+    }
     .btn-ghost {
       border-color: var(--border);
       color: var(--text);
