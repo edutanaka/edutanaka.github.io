@@ -450,6 +450,22 @@
       align-items: start;
       gap: 0.75rem;
     }
+    .card-identity {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+    .card-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(100, 255, 218, 0.35);
+      box-shadow: 0 0 0 1px rgba(100, 255, 218, 0.1), 0 0 12px rgba(100, 255, 218, 0.12);
+      background: rgba(255,255,255,0.04);
+    }
     .card h3 {
       font-family: var(--font-display);
       font-size: 1.15rem;
@@ -632,7 +648,10 @@
     grid.innerHTML = clients.map((c) => `
       <article class="card">
         <div class="card-top">
-          <h3>${c.name}</h3>
+          <div class="card-identity">
+            <img class="card-avatar" src="images/portfolio/${c.handle}.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">
+            <h3>${c.name}</h3>
+          </div>
           <a class="ig" href="https://instagram.com/${c.handle}" target="_blank" rel="noopener">${igIcon} @${c.handle}</a>
         </div>
         <div class="pills">${c.services.map((s) => `<span class="pill">${s}</span>`).join("")}</div>
