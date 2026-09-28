@@ -537,6 +537,18 @@
       /* clip nested Instagram chrome scrollbars */
       overflow: hidden;
     }
+    .ig-slide:not(.is-ready)::before {
+      content: "Carregando post…";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--faint);
+      font-size: 0.9rem;
+      background: rgba(12, 15, 24, 0.9);
+      z-index: 1;
+    }
+    .ig-slide.is-ready::before { display: none; }
     .ig-carousel-nav {
       display: flex;
       justify-content: flex-end;
@@ -695,15 +707,9 @@
           </button>
         </div>
         <div class="ig-carousel" id="ig-carousel">
-          <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/p/C-du2EtOXl2/" captions="false"></instagram-post>
-          </div>
-          <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/p/C0eVc1QOzir/" captions="false"></instagram-post>
-          </div>
-          <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/reel/C1i0P2utHJ_/" captions="false"></instagram-post>
-          </div>
+          <div class="ig-slide" data-post-url="https://www.instagram.com/p/C-du2EtOXl2/"></div>
+          <div class="ig-slide" data-post-url="https://www.instagram.com/p/C0eVc1QOzir/"></div>
+          <div class="ig-slide" data-post-url="https://www.instagram.com/reel/C1i0P2utHJ_/"></div>
         </div>
       </div>
     </section>
@@ -788,6 +794,32 @@
     };
     if (igPrev) igPrev.addEventListener("click", () => scrollIg(-1));
     if (igNext) igNext.addEventListener("click", () => scrollIg(1));
+
+    const mountIgEmbeds = () => {
+      if (!igCarousel || igCarousel.dataset.mounted === "1") return;
+      igCarousel.dataset.mounted = "1";
+      igCarousel.querySelectorAll(".ig-slide[data-post-url]").forEach((slide) => {
+        const url = slide.getAttribute("data-post-url");
+        if (!url || slide.querySelector("instagram-post")) return;
+        const el = document.createElement("instagram-post");
+        el.setAttribute("post-url", url);
+        el.setAttribute("captions", "false");
+        slide.appendChild(el);
+        slide.classList.add("is-ready");
+      });
+    };
+    const igSection = document.getElementById("instagram");
+    if (igSection && "IntersectionObserver" in window) {
+      const igIo = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          mountIgEmbeds();
+          igIo.disconnect();
+        }
+      }, { rootMargin: "200px 0px" });
+      igIo.observe(igSection);
+    } else {
+      mountIgEmbeds();
+    }
   </script>
 </body>
 </html>
