@@ -493,37 +493,49 @@
       position: relative;
     }
     .ig-carousel {
-      display: flex;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(280px, 1fr);
       gap: 1rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
-      padding: 0.35rem 0.15rem 1rem;
+      padding: 0.25rem 0.1rem 0.85rem;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
       scrollbar-color: rgba(100, 255, 218, 0.35) transparent;
     }
-    .ig-carousel::-webkit-scrollbar {
-      height: 6px;
+    @media (min-width: 980px) {
+      .ig-carousel {
+        grid-auto-columns: calc((100% - 2rem) / 3);
+      }
     }
+    .ig-carousel::-webkit-scrollbar { height: 6px; }
     .ig-carousel::-webkit-scrollbar-thumb {
       background: rgba(100, 255, 218, 0.35);
       border-radius: 999px;
     }
     .ig-slide {
-      flex: 0 0 min(320px, 82vw);
       scroll-snap-align: start;
       border-radius: var(--radius);
       border: 1px solid var(--border);
       background: rgba(12, 15, 24, 0.75);
-      padding: 0.65rem;
       overflow: hidden;
-      min-height: 420px;
+      height: 520px;
+      position: relative;
     }
-    .ig-slide instagram-post {
+    .ig-slide instagram-post,
+    .ig-slide iframe,
+    .ig-slide > * {
       display: block;
-      width: 100%;
-      min-height: 380px;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100% !important;
+      border: 0 !important;
+    }
+    .ig-slide {
+      /* clip nested Instagram chrome scrollbars */
+      overflow: hidden;
     }
     .ig-carousel-nav {
       display: flex;
@@ -548,12 +560,9 @@
       border-color: rgba(100, 255, 218, 0.75);
       transform: translateY(-1px);
     }
-    .ig-nav-btn svg {
-      width: 18px;
-      height: 18px;
-    }
+    .ig-nav-btn svg { width: 18px; height: 18px; }
 
-    footer {
+    footer {    footer {
       border-top: 1px solid var(--border);
       padding: 2.5rem 0 3rem;
       margin-top: 1rem;
@@ -674,7 +683,7 @@
     <section class="wrap ig-feed" id="instagram">
       <div class="section-head">
         <h2>Instagram</h2>
-        <p>Últimos posts — via Cloudflare Zaraz.</p>
+        <p>Últimos posts de <a href="https://instagram.com/eduardotanaka1" target="_blank" rel="noopener" style="color:var(--accent)">@eduardotanaka1</a>.</p>
       </div>
       <div class="ig-carousel-wrap">
         <div class="ig-carousel-nav">
@@ -687,19 +696,13 @@
         </div>
         <div class="ig-carousel" id="ig-carousel">
           <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/p/C-du2EtOXl2/" captions="true"></instagram-post>
+            <instagram-post post-url="https://www.instagram.com/p/C-du2EtOXl2/" captions="false"></instagram-post>
           </div>
           <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/p/C0eVc1QOzir/" captions="true"></instagram-post>
+            <instagram-post post-url="https://www.instagram.com/p/C0eVc1QOzir/" captions="false"></instagram-post>
           </div>
           <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/reel/C1i0P2utHJ_/" captions="true"></instagram-post>
-          </div>
-          <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/reel/Dbgz1xARtI3/" captions="true"></instagram-post>
-          </div>
-          <div class="ig-slide">
-            <instagram-post post-url="https://www.instagram.com/reel/DbdZl7IR9BI/" captions="true"></instagram-post>
+            <instagram-post post-url="https://www.instagram.com/reel/C1i0P2utHJ_/" captions="false"></instagram-post>
           </div>
         </div>
       </div>
