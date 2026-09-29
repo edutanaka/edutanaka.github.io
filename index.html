@@ -5,6 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eduardo Tanaka</title>
   <meta name="description" content="Performance de marketing, business intelligence e integrações com inteligência artificial.">
+  <script>
+    /* Persistent external_id for Meta EMQ via Zaraz */
+    (function () {
+      var KEY = "tnk_eid";
+      var eid = null;
+      try {
+        eid = localStorage.getItem(KEY);
+        if (!eid) {
+          var m = document.cookie.match(/(?:^|; )tnk_eid=([^;]*)/);
+          if (m) eid = decodeURIComponent(m[1]);
+        }
+        if (!eid) {
+          eid = (window.crypto && crypto.randomUUID)
+            ? crypto.randomUUID()
+            : (Date.now().toString(36) + Math.random().toString(36).slice(2, 10));
+        }
+        localStorage.setItem(KEY, eid);
+      } catch (e) {
+        eid = eid || (Date.now().toString(36) + Math.random().toString(36).slice(2, 10));
+      }
+      document.cookie = KEY + "=" + encodeURIComponent(eid) +
+        "; path=/; max-age=31536000; SameSite=Lax; Secure";
+
+      function apply() {
+        if (window.zaraz && typeof zaraz.set === "function") {
+          zaraz.set("external_id", eid);
+          return true;
+        }
+        return false;
+      }
+      if (!apply()) {
+        var n = 0;
+        var t = setInterval(function () {
+          if (apply() || ++n > 50) clearInterval(t);
+        }, 50);
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
